@@ -1,0 +1,25 @@
+---
+- name: Allow apt to use https repositories
+  apt: name={{ item }} state=latest
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+
+- name: Add docker apt key
+  apt_key: keyserver={{ docker_keyserver }} id={{ docker_keyid }} state=present
+
+- name: Register docker apt repository
+  apt_repository:
+    repo: 'deb https://apt.dockerproject.org/repo {{ docker_debian_repo }} main'
+    state: present
+  register: new_repo
+
+- name: Update apt cache if new registration of docker repo
+  apt: update_cache=yes
+  when: new_repo.changed
+
+- name: Install docker
+  apt: name=docker-engine state=latest
+
+- name: Ensure docker daemon is started and enabled
+  service: name=docker state=started enabled=yes

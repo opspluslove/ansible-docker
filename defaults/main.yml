@@ -1,0 +1,4 @@
+---
+docker_keyserver: hkp://p80.pool.sks-keyservers.net
+docker_keyid: 58118E89F3A912897C070ADBF76221572C52609D
+docker_debian_repo: debian-jessie
