@@ -1,4 +1,10 @@
 ---
+- name: Install python-yaml
+  apt: name=python-yaml state=latest
+
+- name: Install docker python client
+  pip: name=docker-py state=latest
+
 - name: Allow apt to use https repositories
   apt: name={{ item }} state=latest
   with_items:
