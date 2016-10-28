@@ -5,6 +5,11 @@ docker
 
 Ansible role to install docker-engine
 
+Requirements
+------------
+
+- Python 2.6+
+
 Role Variables
 --------------
 
